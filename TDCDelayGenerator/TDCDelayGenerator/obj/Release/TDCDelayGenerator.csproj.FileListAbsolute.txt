@@ -1,0 +1,10 @@
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\TDCDelayGenerator.exe.config
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\TDCDelayGenerator.exe
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\TDCDelayGenerator.pdb
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\customControl.dll
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\customControl.pdb
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.Form1.resources
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.Properties.Resources.resources
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.csproj.GenerateResource.Cache
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.exe
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.pdb
