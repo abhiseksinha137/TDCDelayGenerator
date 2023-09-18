@@ -26,6 +26,8 @@ namespace TDCDelayGenerator
 
 
         int currentDegVal;
+        int currentDelay;
+        int currentServo;
         private void Form1_Load(object sender, EventArgs e)
         {
             comboSerial1.com.DataReceived += new SerialDataReceivedEventHandler(dataReceived); // Add Handler
@@ -64,13 +66,30 @@ namespace TDCDelayGenerator
         private void dataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             String data = comboSerial1.com.ReadLine();
-            int val;
-            int.TryParse(data, out val);
-            int valDeg = val/stepsPerDegree;
+            try
+            {
+                string[] substrings = data.Split(',');
+                int stagePos = int.Parse(substrings[0]) / stepsPerDegree;
+                int delay = int.Parse(substrings[1]);
+                int servo = int.Parse(substrings[2]);
 
-            ThreadHelperClass.SetText(this, txtBxCurrentPos, valDeg.ToString());
-            currentDegVal = valDeg;
+                //int val;
+                //int.TryParse(data, out val);
+                //int valDeg = val/stepsPerDegree;
+                currentDegVal = stagePos;
+                currentDelay = delay;
+                currentServo = servo;
+
+                ThreadHelperClass.SetText(this, txtBxCurrentPos, currentDegVal.ToString());
+
+                ThreadHelperClass.SetText(this, txtBxCurrentDelay, currentDelay.ToString());
+
+                ThreadHelperClass.SetText(this, txtBxCurrentServo, currentServo.ToString());
+            }
+            catch (Exception ex)
+            { }
         }
+
 
 
 
@@ -356,14 +375,55 @@ namespace TDCDelayGenerator
                             if (backgroundWorker1.CancellationPending)
                                 return;
                         }
+                        waitIdx = 0;
+
                         // Do your thing
                         // move servo To on Position
                         int delay= (int)(Math.Round(delays[iterPositions]));
                         sendDelay(delay);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
+                        while (currentDelay != delay)
+                        {
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Delay " + waitIdx.ToString());
+                            waitIdx = waitIdx + 1;
+                            if (waitIdx > 10000)
+                            {
+                                sendDelay(delay); waitIdx = 0;
+                            }
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                        }
+                        waitIdx = 0;
                         SendbeamOn();
-                        Thread.Sleep(deltaTime);
+                        while (currentServo != beamOn)
+                        {
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam On " + waitIdx.ToString()+ currentServo.ToString());
+                            waitIdx = waitIdx + 1;
+                            if (waitIdx > 10000)
+                            {
+                                SendbeamOn(); waitIdx = 0;
+                            }
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                        }
+
+                            // Acquire Data
+                            Thread.Sleep(deltaTime);
+
                         SendbeamOff();
+
+                        waitIdx = 0;
+                        while (currentServo != beamOff)
+                        {
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam Off " + waitIdx.ToString());
+                            waitIdx = waitIdx + 1;
+                            if (waitIdx > 10000)
+                            {
+                                SendbeamOff(); waitIdx = 0;
+                            }
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                        }
 
                         if (iterSweep%2 ==0) // even
                             iterPositions = iterPositions + 1;

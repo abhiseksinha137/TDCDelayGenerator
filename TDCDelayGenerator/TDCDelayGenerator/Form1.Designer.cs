@@ -71,6 +71,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtBxCurrentDelay = new System.Windows.Forms.TextBox();
+            this.txtBxCurrentServo = new System.Windows.Forms.TextBox();
             this.gradientPanel2 = new TDCDelayGenerator.GradientPanel();
             this.tareStage = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
@@ -140,6 +142,7 @@
             // 
             this.groupBoxServo.Controls.Add(this.btnBeamBlock);
             this.groupBoxServo.Controls.Add(this.btnBeamOn);
+            this.groupBoxServo.Controls.Add(this.txtBxCurrentServo);
             this.groupBoxServo.Location = new System.Drawing.Point(5, 200);
             this.groupBoxServo.Name = "groupBoxServo";
             this.groupBoxServo.Size = new System.Drawing.Size(352, 81);
@@ -173,6 +176,7 @@
             this.groupBoxDelayChip.Controls.Add(this.txtBxDelay);
             this.groupBoxDelayChip.Controls.Add(this.btnSendDelay);
             this.groupBoxDelayChip.Controls.Add(this.label4);
+            this.groupBoxDelayChip.Controls.Add(this.txtBxCurrentDelay);
             this.groupBoxDelayChip.Location = new System.Drawing.Point(5, 117);
             this.groupBoxDelayChip.Name = "groupBoxDelayChip";
             this.groupBoxDelayChip.Size = new System.Drawing.Size(352, 59);
@@ -199,7 +203,7 @@
             // 
             // btnSendDelay
             // 
-            this.btnSendDelay.Location = new System.Drawing.Point(267, 17);
+            this.btnSendDelay.Location = new System.Drawing.Point(267, 30);
             this.btnSendDelay.Name = "btnSendDelay";
             this.btnSendDelay.Size = new System.Drawing.Size(75, 23);
             this.btnSendDelay.TabIndex = 0;
@@ -329,9 +333,9 @@
             // pnlStatus
             // 
             this.pnlStatus.Controls.Add(this.lblexpStatus);
-            this.pnlStatus.Location = new System.Drawing.Point(99, 283);
+            this.pnlStatus.Location = new System.Drawing.Point(99, 291);
             this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(115, 38);
+            this.pnlStatus.Size = new System.Drawing.Size(115, 30);
             this.pnlStatus.TabIndex = 5;
             // 
             // lblexpStatus
@@ -373,7 +377,7 @@
             // lblStageStatus
             // 
             this.lblStageStatus.AutoSize = true;
-            this.lblStageStatus.Location = new System.Drawing.Point(33, 298);
+            this.lblStageStatus.Location = new System.Drawing.Point(5, 267);
             this.lblStageStatus.Name = "lblStageStatus";
             this.lblStageStatus.Size = new System.Drawing.Size(16, 13);
             this.lblStageStatus.TabIndex = 4;
@@ -504,6 +508,22 @@
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // txtBxCurrentDelay
+            // 
+            this.txtBxCurrentDelay.Enabled = false;
+            this.txtBxCurrentDelay.Location = new System.Drawing.Point(267, 8);
+            this.txtBxCurrentDelay.Name = "txtBxCurrentDelay";
+            this.txtBxCurrentDelay.Size = new System.Drawing.Size(75, 20);
+            this.txtBxCurrentDelay.TabIndex = 0;
+            // 
+            // txtBxCurrentServo
+            // 
+            this.txtBxCurrentServo.Enabled = false;
+            this.txtBxCurrentServo.Location = new System.Drawing.Point(267, 21);
+            this.txtBxCurrentServo.Name = "txtBxCurrentServo";
+            this.txtBxCurrentServo.Size = new System.Drawing.Size(75, 20);
+            this.txtBxCurrentServo.TabIndex = 0;
             // 
             // gradientPanel2
             // 
@@ -644,6 +664,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBoxServo.ResumeLayout(false);
+            this.groupBoxServo.PerformLayout();
             this.groupBoxDelayChip.ResumeLayout(false);
             this.groupBoxDelayChip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDelay)).EndInit();
@@ -712,6 +733,8 @@
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Label lblexpStatus;
         private System.Windows.Forms.Label lblStageStatus;
+        private System.Windows.Forms.TextBox txtBxCurrentDelay;
+        private System.Windows.Forms.TextBox txtBxCurrentServo;
     }
 }
 
