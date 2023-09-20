@@ -30,6 +30,9 @@ namespace TDCDelayGenerator
         int currentServo;
         private void Form1_Load(object sender, EventArgs e)
         {
+            //this.BackColor = Color.Lime;
+            //this.TransparencyKey = Color.Lime;
+
             comboSerial1.com.DataReceived += new SerialDataReceivedEventHandler(dataReceived); // Add Handler
             // Initialize settings
             initializeSettings();
@@ -326,6 +329,7 @@ namespace TDCDelayGenerator
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
+            ThreadHelperClass.SetText(this, lblexpStatus, "Started");
             try
             {
                 //changePanelStaus("On");
@@ -334,6 +338,7 @@ namespace TDCDelayGenerator
                 int N= int.Parse(txtBxNumber.Text);
                 int iterations= int.Parse(txtBxIterations.Text);
                 int ACQTime = int.Parse(txtBxACQseconds.Text);
+                int waitLim = 3000;
 
                 float [] positions=linspace(startDeg, stopDeg, N);
                 float [] delays= linspace(0, 255, N);
@@ -368,7 +373,7 @@ namespace TDCDelayGenerator
                             //}
                             ThreadHelperClass.SetText(this, lblStageStatus, "Moving " + waitIdx.ToString());
                             waitIdx = waitIdx+1;
-                            if (waitIdx>10000)
+                            if (waitIdx> waitLim)
                             {
                                 moveAbs(position); waitIdx = 0;
                             }
@@ -386,7 +391,7 @@ namespace TDCDelayGenerator
                         {
                             ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Delay " + waitIdx.ToString());
                             waitIdx = waitIdx + 1;
-                            if (waitIdx > 10000)
+                            if (waitIdx > waitLim)
                             {
                                 sendDelay(delay); waitIdx = 0;
                             }
@@ -399,7 +404,7 @@ namespace TDCDelayGenerator
                         {
                             ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam On " + waitIdx.ToString()+ currentServo.ToString());
                             waitIdx = waitIdx + 1;
-                            if (waitIdx > 10000)
+                            if (waitIdx > waitLim)
                             {
                                 SendbeamOn(); waitIdx = 0;
                             }
@@ -417,7 +422,7 @@ namespace TDCDelayGenerator
                         {
                             ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam Off " + waitIdx.ToString());
                             waitIdx = waitIdx + 1;
-                            if (waitIdx > 10000)
+                            if (waitIdx > waitLim)
                             {
                                 SendbeamOff(); waitIdx = 0;
                             }
@@ -438,6 +443,7 @@ namespace TDCDelayGenerator
                 //changePanelStaus("Off");
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
         private void gradientPanel1_Paint(object sender, PaintEventArgs e)
@@ -448,6 +454,7 @@ namespace TDCDelayGenerator
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //changePanelStaus("Off");
+            ThreadHelperClass.SetText(this, lblexpStatus, "Completed");
         }
     }
 }
