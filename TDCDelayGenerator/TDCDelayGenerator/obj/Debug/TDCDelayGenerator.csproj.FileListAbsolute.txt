@@ -11,3 +11,4 @@ E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDel
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\ConexAGPCmdLib.DLL
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\VCPWrap.dll
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\Logging.dll
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csprojResolveAssemblyReference.cache

@@ -504,7 +504,7 @@ namespace TDCDelayGenerator
                 int ACQTime = int.Parse(txtBxACQseconds.Text);
                 int waitLim = 3000;
 
-                float[] positions = linspace(startDeg, stopDeg, NConex);
+                float[] positions = linspace(startDeg, stopDeg, N);
                 float[] positionsConex = linspace(startDegConex, stopDegConex, NConex);
                 float[] delayTimes = linspace(0, 255, N*NConex);
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
