@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ConexAGPCmdLib">
+      <HintPath>C:\Program Files\Newport\Piezo Motion Control\Newport CONEX-AGP Applet\Bin\ConexAGPCmdLib.DLL</HintPath>
+    </Reference>
     <Reference Include="customControl">
       <HintPath>..\..\..\..\VB.NEt\customControl\customControl\bin\Debug\customControl.dll</HintPath>
     </Reference>

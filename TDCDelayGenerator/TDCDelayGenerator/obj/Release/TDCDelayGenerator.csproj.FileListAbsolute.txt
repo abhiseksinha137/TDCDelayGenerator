@@ -8,4 +8,6 @@ E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCD
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.csproj.GenerateResource.Cache
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.exe
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.pdb
-E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Release\TDCDelayGenerator.csprojResolveAssemblyReference.cache
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\ConexAGPCmdLib.DLL
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\VCPWrap.dll
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Release\Logging.dll

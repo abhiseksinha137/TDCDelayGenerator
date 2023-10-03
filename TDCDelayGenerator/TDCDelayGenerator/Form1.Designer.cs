@@ -29,15 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxServo = new System.Windows.Forms.GroupBox();
             this.btnBeamBlock = new System.Windows.Forms.Button();
             this.btnBeamOn = new System.Windows.Forms.Button();
+            this.txtBxCurrentServo = new System.Windows.Forms.TextBox();
             this.groupBoxDelayChip = new System.Windows.Forms.GroupBox();
             this.trackBarDelay = new System.Windows.Forms.TrackBar();
             this.txtBxDelay = new System.Windows.Forms.TextBox();
             this.btnSendDelay = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtBxCurrentDelay = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnConexDisconnect = new System.Windows.Forms.Button();
+            this.btnConexConnect = new System.Windows.Forms.Button();
+            this.cmbBxConexPort = new System.Windows.Forms.ComboBox();
+            this.button1btnConexMoveRel = new System.Windows.Forms.Button();
+            this.btnConexMoveAbs = new System.Windows.Forms.Button();
+            this.btnConexStop = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtBxConexMoveRel = new System.Windows.Forms.TextBox();
+            this.txtBxConexCurrentPos = new System.Windows.Forms.TextBox();
+            this.txtBxConexMoveAbs = new System.Windows.Forms.TextBox();
             this.groupBoxStage = new System.Windows.Forms.GroupBox();
             this.btnMoveRel = new System.Windows.Forms.Button();
             this.btnMoveAbs = new System.Windows.Forms.Button();
@@ -49,6 +66,8 @@
             this.txtBxCurrentPos = new System.Windows.Forms.TextBox();
             this.txtBxmoveAbs = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
+            this.txtBxFileName = new System.Windows.Forms.TextBox();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblexpStatus = new System.Windows.Forms.Label();
             this.lblPositionNumber = new System.Windows.Forms.Label();
@@ -59,20 +78,30 @@
             this.btnStopExp = new System.Windows.Forms.Button();
             this.btnStartExp = new System.Windows.Forms.Button();
             this.txtBxIterations = new System.Windows.Forms.TextBox();
+            this.txtBxConexNumber = new System.Windows.Forms.TextBox();
             this.txtBxNumber = new System.Windows.Forms.TextBox();
+            this.txtBxConexStop = new System.Windows.Forms.TextBox();
             this.txtBxStop = new System.Windows.Forms.TextBox();
             this.txtBxACQseconds = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtBxConexStart = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.txtBxStart = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtBxCurrentDelay = new System.Windows.Forms.TextBox();
-            this.txtBxCurrentServo = new System.Windows.Forms.TextBox();
+            this.timerConex = new System.Windows.Forms.Timer(this.components);
+            this.txtBxLog = new System.Windows.Forms.TextBox();
+            this.toolTipAbout = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTiptxtBxFileName = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipConexConnect = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipConexDisconnect = new System.Windows.Forms.ToolTip(this.components);
             this.gradientPanel2 = new TDCDelayGenerator.GradientPanel();
             this.tareStage = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
@@ -85,6 +114,7 @@
             this.lblSettings = new System.Windows.Forms.Label();
             this.comboSerial1 = new customControl.comboSerial();
             this.gradientPanel1 = new TDCDelayGenerator.GradientPanel();
+            this.lblAbout = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,9 +122,11 @@
             this.groupBoxServo.SuspendLayout();
             this.groupBoxDelayChip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDelay)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.groupBoxStage.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.gradientPanel2.SuspendLayout();
+            this.gradientPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -108,12 +140,15 @@
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightYellow;
             this.splitContainer1.Panel1.Controls.Add(this.groupBoxServo);
             this.splitContainer1.Panel1.Controls.Add(this.groupBoxDelayChip);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.groupBoxStage);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer1.Panel2.Controls.Add(this.linkLabelBrowse);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBxFileName);
             this.splitContainer1.Panel2.Controls.Add(this.pnlStatus);
             this.splitContainer1.Panel2.Controls.Add(this.lblPositionNumber);
             this.splitContainer1.Panel2.Controls.Add(this.lblSweepNum);
@@ -123,18 +158,24 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnStopExp);
             this.splitContainer1.Panel2.Controls.Add(this.btnStartExp);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxIterations);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBxConexNumber);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxNumber);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBxConexStop);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxStop);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxACQseconds);
             this.splitContainer1.Panel2.Controls.Add(this.label11);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBxConexStart);
+            this.splitContainer1.Panel2.Controls.Add(this.label19);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxStart);
             this.splitContainer1.Panel2.Controls.Add(this.label8);
+            this.splitContainer1.Panel2.Controls.Add(this.label18);
             this.splitContainer1.Panel2.Controls.Add(this.label10);
+            this.splitContainer1.Panel2.Controls.Add(this.label17);
             this.splitContainer1.Panel2.Controls.Add(this.label9);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(599, 326);
+            this.splitContainer1.Size = new System.Drawing.Size(599, 444);
             this.splitContainer1.SplitterDistance = 364;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -143,7 +184,7 @@
             this.groupBoxServo.Controls.Add(this.btnBeamBlock);
             this.groupBoxServo.Controls.Add(this.btnBeamOn);
             this.groupBoxServo.Controls.Add(this.txtBxCurrentServo);
-            this.groupBoxServo.Location = new System.Drawing.Point(5, 200);
+            this.groupBoxServo.Location = new System.Drawing.Point(7, 331);
             this.groupBoxServo.Name = "groupBoxServo";
             this.groupBoxServo.Size = new System.Drawing.Size(352, 81);
             this.groupBoxServo.TabIndex = 1;
@@ -169,6 +210,14 @@
             this.btnBeamOn.Text = "Beam On";
             this.btnBeamOn.UseVisualStyleBackColor = true;
             this.btnBeamOn.Click += new System.EventHandler(this.btnBeamOn_Click);
+            // 
+            // txtBxCurrentServo
+            // 
+            this.txtBxCurrentServo.Enabled = false;
+            this.txtBxCurrentServo.Location = new System.Drawing.Point(267, 21);
+            this.txtBxCurrentServo.Name = "txtBxCurrentServo";
+            this.txtBxCurrentServo.Size = new System.Drawing.Size(75, 20);
+            this.txtBxCurrentServo.TabIndex = 0;
             // 
             // groupBoxDelayChip
             // 
@@ -220,6 +269,161 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Delay Value";
             // 
+            // txtBxCurrentDelay
+            // 
+            this.txtBxCurrentDelay.Enabled = false;
+            this.txtBxCurrentDelay.Location = new System.Drawing.Point(267, 8);
+            this.txtBxCurrentDelay.Name = "txtBxCurrentDelay";
+            this.txtBxCurrentDelay.Size = new System.Drawing.Size(75, 20);
+            this.txtBxCurrentDelay.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnConexDisconnect);
+            this.groupBox1.Controls.Add(this.btnConexConnect);
+            this.groupBox1.Controls.Add(this.cmbBxConexPort);
+            this.groupBox1.Controls.Add(this.button1btnConexMoveRel);
+            this.groupBox1.Controls.Add(this.btnConexMoveAbs);
+            this.groupBox1.Controls.Add(this.btnConexStop);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.txtBxConexMoveRel);
+            this.groupBox1.Controls.Add(this.txtBxConexCurrentPos);
+            this.groupBox1.Controls.Add(this.txtBxConexMoveAbs);
+            this.groupBox1.Location = new System.Drawing.Point(6, 199);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(352, 113);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Conex Agilis";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBoxStage_Enter);
+            // 
+            // btnConexDisconnect
+            // 
+            this.btnConexDisconnect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConexDisconnect.BackgroundImage")));
+            this.btnConexDisconnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnConexDisconnect.Enabled = false;
+            this.btnConexDisconnect.Location = new System.Drawing.Point(216, 21);
+            this.btnConexDisconnect.Name = "btnConexDisconnect";
+            this.btnConexDisconnect.Size = new System.Drawing.Size(41, 23);
+            this.btnConexDisconnect.TabIndex = 5;
+            this.btnConexDisconnect.UseVisualStyleBackColor = true;
+            this.btnConexDisconnect.Click += new System.EventHandler(this.btnConexDisconnect_Click);
+            // 
+            // btnConexConnect
+            // 
+            this.btnConexConnect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConexConnect.BackgroundImage")));
+            this.btnConexConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnConexConnect.Location = new System.Drawing.Point(168, 21);
+            this.btnConexConnect.Name = "btnConexConnect";
+            this.btnConexConnect.Size = new System.Drawing.Size(43, 23);
+            this.btnConexConnect.TabIndex = 5;
+            this.btnConexConnect.UseVisualStyleBackColor = true;
+            this.btnConexConnect.Click += new System.EventHandler(this.btnConexConnect_Click);
+            // 
+            // cmbBxConexPort
+            // 
+            this.cmbBxConexPort.FormattingEnabled = true;
+            this.cmbBxConexPort.Location = new System.Drawing.Point(87, 23);
+            this.cmbBxConexPort.Name = "cmbBxConexPort";
+            this.cmbBxConexPort.Size = new System.Drawing.Size(76, 21);
+            this.cmbBxConexPort.TabIndex = 4;
+            this.cmbBxConexPort.SelectedIndexChanged += new System.EventHandler(this.cmbBxConexPort_SelectedIndexChanged);
+            this.cmbBxConexPort.Click += new System.EventHandler(this.cmbBxConexPort_Click);
+            // 
+            // button1btnConexMoveRel
+            // 
+            this.button1btnConexMoveRel.Location = new System.Drawing.Point(169, 83);
+            this.button1btnConexMoveRel.Name = "button1btnConexMoveRel";
+            this.button1btnConexMoveRel.Size = new System.Drawing.Size(42, 23);
+            this.button1btnConexMoveRel.TabIndex = 3;
+            this.button1btnConexMoveRel.Text = "Go";
+            this.button1btnConexMoveRel.UseVisualStyleBackColor = true;
+            this.button1btnConexMoveRel.Click += new System.EventHandler(this.button1btnConexMoveRel_Click);
+            // 
+            // btnConexMoveAbs
+            // 
+            this.btnConexMoveAbs.Location = new System.Drawing.Point(169, 57);
+            this.btnConexMoveAbs.Name = "btnConexMoveAbs";
+            this.btnConexMoveAbs.Size = new System.Drawing.Size(42, 23);
+            this.btnConexMoveAbs.TabIndex = 3;
+            this.btnConexMoveAbs.Text = "Go";
+            this.btnConexMoveAbs.UseVisualStyleBackColor = true;
+            this.btnConexMoveAbs.Click += new System.EventHandler(this.btnConexMoveAbs_Click);
+            // 
+            // btnConexStop
+            // 
+            this.btnConexStop.Location = new System.Drawing.Point(267, 82);
+            this.btnConexStop.Name = "btnConexStop";
+            this.btnConexStop.Size = new System.Drawing.Size(75, 23);
+            this.btnConexStop.TabIndex = 2;
+            this.btnConexStop.Text = "Stop";
+            this.btnConexStop.UseVisualStyleBackColor = true;
+            this.btnConexStop.Click += new System.EventHandler(this.btnConexStop_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(264, 41);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Current Pos";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(8, 88);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 13);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Move Relative";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 26);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "COM Port";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(78, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Move Absolute";
+            // 
+            // txtBxConexMoveRel
+            // 
+            this.txtBxConexMoveRel.Location = new System.Drawing.Point(88, 85);
+            this.txtBxConexMoveRel.Name = "txtBxConexMoveRel";
+            this.txtBxConexMoveRel.Size = new System.Drawing.Size(75, 20);
+            this.txtBxConexMoveRel.TabIndex = 0;
+            this.txtBxConexMoveRel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBxConexMoveRel_KeyDown);
+            // 
+            // txtBxConexCurrentPos
+            // 
+            this.txtBxConexCurrentPos.Enabled = false;
+            this.txtBxConexCurrentPos.Location = new System.Drawing.Point(267, 57);
+            this.txtBxConexCurrentPos.Name = "txtBxConexCurrentPos";
+            this.txtBxConexCurrentPos.Size = new System.Drawing.Size(75, 20);
+            this.txtBxConexCurrentPos.TabIndex = 0;
+            this.txtBxConexCurrentPos.TextChanged += new System.EventHandler(this.txtBxConexCurrentPos_TextChanged);
+            // 
+            // txtBxConexMoveAbs
+            // 
+            this.txtBxConexMoveAbs.Location = new System.Drawing.Point(88, 59);
+            this.txtBxConexMoveAbs.Name = "txtBxConexMoveAbs";
+            this.txtBxConexMoveAbs.Size = new System.Drawing.Size(75, 20);
+            this.txtBxConexMoveAbs.TabIndex = 0;
+            this.txtBxConexMoveAbs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBxConexMoveAbs_KeyDown);
+            // 
             // groupBoxStage
             // 
             this.groupBoxStage.Controls.Add(this.btnMoveRel);
@@ -237,6 +441,7 @@
             this.groupBoxStage.TabIndex = 1;
             this.groupBoxStage.TabStop = false;
             this.groupBoxStage.Text = "Rotation Stage";
+            this.groupBoxStage.Enter += new System.EventHandler(this.groupBoxStage_Enter);
             // 
             // btnMoveRel
             // 
@@ -330,10 +535,30 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Controls";
             // 
+            // linkLabelBrowse
+            // 
+            this.linkLabelBrowse.AutoSize = true;
+            this.linkLabelBrowse.Location = new System.Drawing.Point(179, 2);
+            this.linkLabelBrowse.Name = "linkLabelBrowse";
+            this.linkLabelBrowse.Size = new System.Drawing.Size(42, 13);
+            this.linkLabelBrowse.TabIndex = 12;
+            this.linkLabelBrowse.TabStop = true;
+            this.linkLabelBrowse.Text = "Browse";
+            this.linkLabelBrowse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBrowse_LinkClicked);
+            // 
+            // txtBxFileName
+            // 
+            this.txtBxFileName.Location = new System.Drawing.Point(12, 16);
+            this.txtBxFileName.Multiline = true;
+            this.txtBxFileName.Name = "txtBxFileName";
+            this.txtBxFileName.Size = new System.Drawing.Size(206, 60);
+            this.txtBxFileName.TabIndex = 11;
+            this.txtBxFileName.TextChanged += new System.EventHandler(this.txtBxFileName_TextChanged);
+            // 
             // pnlStatus
             // 
             this.pnlStatus.Controls.Add(this.lblexpStatus);
-            this.pnlStatus.Location = new System.Drawing.Point(99, 291);
+            this.pnlStatus.Location = new System.Drawing.Point(103, 406);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(115, 30);
             this.pnlStatus.TabIndex = 5;
@@ -350,7 +575,7 @@
             // lblPositionNumber
             // 
             this.lblPositionNumber.AutoSize = true;
-            this.lblPositionNumber.Location = new System.Drawing.Point(65, 200);
+            this.lblPositionNumber.Location = new System.Drawing.Point(78, 331);
             this.lblPositionNumber.Name = "lblPositionNumber";
             this.lblPositionNumber.Size = new System.Drawing.Size(10, 13);
             this.lblPositionNumber.TabIndex = 4;
@@ -359,7 +584,7 @@
             // lblSweepNum
             // 
             this.lblSweepNum.AutoSize = true;
-            this.lblSweepNum.Location = new System.Drawing.Point(65, 183);
+            this.lblSweepNum.Location = new System.Drawing.Point(131, 327);
             this.lblSweepNum.Name = "lblSweepNum";
             this.lblSweepNum.Size = new System.Drawing.Size(10, 13);
             this.lblSweepNum.TabIndex = 4;
@@ -368,7 +593,7 @@
             // lbl13
             // 
             this.lbl13.AutoSize = true;
-            this.lbl13.Location = new System.Drawing.Point(5, 200);
+            this.lbl13.Location = new System.Drawing.Point(11, 331);
             this.lbl13.Name = "lbl13";
             this.lbl13.Size = new System.Drawing.Size(44, 13);
             this.lbl13.TabIndex = 4;
@@ -377,7 +602,7 @@
             // lblStageStatus
             // 
             this.lblStageStatus.AutoSize = true;
-            this.lblStageStatus.Location = new System.Drawing.Point(5, 267);
+            this.lblStageStatus.Location = new System.Drawing.Point(78, 314);
             this.lblStageStatus.Name = "lblStageStatus";
             this.lblStageStatus.Size = new System.Drawing.Size(16, 13);
             this.lblStageStatus.TabIndex = 4;
@@ -386,7 +611,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 183);
+            this.label12.Location = new System.Drawing.Point(9, 314);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(63, 13);
             this.label12.TabIndex = 4;
@@ -394,103 +619,155 @@
             // 
             // btnStopExp
             // 
-            this.btnStopExp.Location = new System.Drawing.Point(120, 225);
+            this.btnStopExp.Location = new System.Drawing.Point(124, 343);
             this.btnStopExp.Name = "btnStopExp";
             this.btnStopExp.Size = new System.Drawing.Size(94, 41);
-            this.btnStopExp.TabIndex = 3;
+            this.btnStopExp.TabIndex = 10;
             this.btnStopExp.Text = "Stop Experiment";
             this.btnStopExp.UseVisualStyleBackColor = true;
             this.btnStopExp.Click += new System.EventHandler(this.btnStopExp_Click);
             // 
             // btnStartExp
             // 
-            this.btnStartExp.Location = new System.Drawing.Point(19, 225);
+            this.btnStartExp.Location = new System.Drawing.Point(23, 343);
             this.btnStartExp.Name = "btnStartExp";
             this.btnStartExp.Size = new System.Drawing.Size(95, 41);
-            this.btnStartExp.TabIndex = 3;
+            this.btnStartExp.TabIndex = 9;
             this.btnStartExp.Text = "Start Experiment";
             this.btnStartExp.UseVisualStyleBackColor = true;
             this.btnStartExp.Click += new System.EventHandler(this.btnStartExp_Click);
             // 
             // txtBxIterations
             // 
-            this.txtBxIterations.Location = new System.Drawing.Point(114, 108);
+            this.txtBxIterations.Location = new System.Drawing.Point(118, 261);
             this.txtBxIterations.Name = "txtBxIterations";
             this.txtBxIterations.Size = new System.Drawing.Size(100, 20);
-            this.txtBxIterations.TabIndex = 2;
+            this.txtBxIterations.TabIndex = 7;
+            // 
+            // txtBxConexNumber
+            // 
+            this.txtBxConexNumber.Location = new System.Drawing.Point(118, 128);
+            this.txtBxConexNumber.Name = "txtBxConexNumber";
+            this.txtBxConexNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtBxConexNumber.TabIndex = 3;
+            this.txtBxConexNumber.Text = "2";
             // 
             // txtBxNumber
             // 
-            this.txtBxNumber.Location = new System.Drawing.Point(114, 84);
+            this.txtBxNumber.Location = new System.Drawing.Point(118, 218);
             this.txtBxNumber.Name = "txtBxNumber";
             this.txtBxNumber.Size = new System.Drawing.Size(100, 20);
-            this.txtBxNumber.TabIndex = 2;
+            this.txtBxNumber.TabIndex = 6;
+            // 
+            // txtBxConexStop
+            // 
+            this.txtBxConexStop.Location = new System.Drawing.Point(118, 105);
+            this.txtBxConexStop.Name = "txtBxConexStop";
+            this.txtBxConexStop.Size = new System.Drawing.Size(100, 20);
+            this.txtBxConexStop.TabIndex = 2;
+            this.txtBxConexStop.Text = "2";
             // 
             // txtBxStop
             // 
-            this.txtBxStop.Location = new System.Drawing.Point(114, 61);
+            this.txtBxStop.Location = new System.Drawing.Point(118, 195);
             this.txtBxStop.Name = "txtBxStop";
             this.txtBxStop.Size = new System.Drawing.Size(100, 20);
-            this.txtBxStop.TabIndex = 2;
+            this.txtBxStop.TabIndex = 5;
+            this.txtBxStop.TextChanged += new System.EventHandler(this.txtBxStop_TextChanged);
             // 
             // txtBxACQseconds
             // 
-            this.txtBxACQseconds.Location = new System.Drawing.Point(114, 132);
+            this.txtBxACQseconds.Location = new System.Drawing.Point(118, 285);
             this.txtBxACQseconds.Name = "txtBxACQseconds";
             this.txtBxACQseconds.Size = new System.Drawing.Size(100, 20);
-            this.txtBxACQseconds.TabIndex = 2;
+            this.txtBxACQseconds.TabIndex = 8;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 135);
+            this.label11.Location = new System.Drawing.Point(9, 287);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(109, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "Acquisition (Seconds)";
             // 
+            // txtBxConexStart
+            // 
+            this.txtBxConexStart.Location = new System.Drawing.Point(118, 82);
+            this.txtBxConexStart.Name = "txtBxConexStart";
+            this.txtBxConexStart.Size = new System.Drawing.Size(100, 20);
+            this.txtBxConexStart.TabIndex = 1;
+            this.txtBxConexStart.Text = "1";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 85);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(92, 13);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Conex Start Angle";
+            // 
             // txtBxStart
             // 
-            this.txtBxStart.Location = new System.Drawing.Point(114, 38);
+            this.txtBxStart.Location = new System.Drawing.Point(118, 172);
             this.txtBxStart.Name = "txtBxStart";
             this.txtBxStart.Size = new System.Drawing.Size(100, 20);
-            this.txtBxStart.TabIndex = 2;
+            this.txtBxStart.TabIndex = 4;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 41);
+            this.label8.Location = new System.Drawing.Point(9, 175);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 13);
+            this.label8.Size = new System.Drawing.Size(79, 13);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Start Angle";
+            this.label8.Text = "Rot Start Angle";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(9, 131);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(109, 13);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Conex Num of Angles";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 111);
+            this.label10.Location = new System.Drawing.Point(11, 264);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 13);
             this.label10.TabIndex = 1;
             this.label10.Text = "Iterations";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 108);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(92, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Conex Stop Angle";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 87);
+            this.label9.Location = new System.Drawing.Point(9, 221);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 13);
+            this.label9.Size = new System.Drawing.Size(96, 13);
             this.label9.TabIndex = 1;
-            this.label9.Text = "Number of Angles";
+            this.label9.Text = "Rot Num of Angles";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 64);
+            this.label7.Location = new System.Drawing.Point(9, 198);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 13);
+            this.label7.Size = new System.Drawing.Size(79, 13);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Stop Angle";
+            this.label7.Text = "Rot Stop Angle";
             // 
             // label2
             // 
@@ -509,21 +786,21 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // txtBxCurrentDelay
+            // timerConex
             // 
-            this.txtBxCurrentDelay.Enabled = false;
-            this.txtBxCurrentDelay.Location = new System.Drawing.Point(267, 8);
-            this.txtBxCurrentDelay.Name = "txtBxCurrentDelay";
-            this.txtBxCurrentDelay.Size = new System.Drawing.Size(75, 20);
-            this.txtBxCurrentDelay.TabIndex = 0;
+            this.timerConex.Interval = 500;
+            this.timerConex.Tick += new System.EventHandler(this.timerConex_Tick);
             // 
-            // txtBxCurrentServo
+            // txtBxLog
             // 
-            this.txtBxCurrentServo.Enabled = false;
-            this.txtBxCurrentServo.Location = new System.Drawing.Point(267, 21);
-            this.txtBxCurrentServo.Name = "txtBxCurrentServo";
-            this.txtBxCurrentServo.Size = new System.Drawing.Size(75, 20);
-            this.txtBxCurrentServo.TabIndex = 0;
+            this.txtBxLog.BackColor = System.Drawing.Color.Black;
+            this.txtBxLog.ForeColor = System.Drawing.Color.Lime;
+            this.txtBxLog.Location = new System.Drawing.Point(718, 31);
+            this.txtBxLog.Multiline = true;
+            this.txtBxLog.Name = "txtBxLog";
+            this.txtBxLog.Size = new System.Drawing.Size(360, 444);
+            this.txtBxLog.TabIndex = 11;
+            this.txtBxLog.TextChanged += new System.EventHandler(this.txtBxLog_TextChanged);
             // 
             // gradientPanel2
             // 
@@ -542,7 +819,7 @@
             this.gradientPanel2.Controls.Add(this.comboSerial1);
             this.gradientPanel2.Location = new System.Drawing.Point(0, 31);
             this.gradientPanel2.Name = "gradientPanel2";
-            this.gradientPanel2.Size = new System.Drawing.Size(112, 326);
+            this.gradientPanel2.Size = new System.Drawing.Size(112, 444);
             this.gradientPanel2.TabIndex = 10;
             this.gradientPanel2.TopColor = System.Drawing.Color.White;
             // 
@@ -637,18 +914,30 @@
             this.gradientPanel1.Angle = -90F;
             this.gradientPanel1.BackColor = System.Drawing.Color.Silver;
             this.gradientPanel1.BottomColor = System.Drawing.Color.Empty;
+            this.gradientPanel1.Controls.Add(this.lblAbout);
             this.gradientPanel1.Location = new System.Drawing.Point(-1, -1);
             this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Size = new System.Drawing.Size(937, 30);
+            this.gradientPanel1.Size = new System.Drawing.Size(1094, 30);
             this.gradientPanel1.TabIndex = 9;
             this.gradientPanel1.TopColor = System.Drawing.Color.White;
             this.gradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.gradientPanel1_Paint);
+            // 
+            // lblAbout
+            // 
+            this.lblAbout.AutoSize = true;
+            this.lblAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAbout.Location = new System.Drawing.Point(1035, 10);
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(43, 16);
+            this.lblAbout.TabIndex = 10;
+            this.lblAbout.Text = "About";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 362);
+            this.ClientSize = new System.Drawing.Size(1079, 479);
+            this.Controls.Add(this.txtBxLog);
             this.Controls.Add(this.gradientPanel2);
             this.Controls.Add(this.gradientPanel1);
             this.Controls.Add(this.splitContainer1);
@@ -668,13 +957,18 @@
             this.groupBoxDelayChip.ResumeLayout(false);
             this.groupBoxDelayChip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDelay)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBoxStage.ResumeLayout(false);
             this.groupBoxStage.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlStatus.PerformLayout();
             this.gradientPanel2.ResumeLayout(false);
             this.gradientPanel2.PerformLayout();
+            this.gradientPanel1.ResumeLayout(false);
+            this.gradientPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -735,6 +1029,35 @@
         private System.Windows.Forms.Label lblStageStatus;
         private System.Windows.Forms.TextBox txtBxCurrentDelay;
         private System.Windows.Forms.TextBox txtBxCurrentServo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button1btnConexMoveRel;
+        private System.Windows.Forms.Button btnConexMoveAbs;
+        private System.Windows.Forms.Button btnConexStop;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtBxConexMoveRel;
+        private System.Windows.Forms.TextBox txtBxConexCurrentPos;
+        private System.Windows.Forms.TextBox txtBxConexMoveAbs;
+        private System.Windows.Forms.Button btnConexDisconnect;
+        private System.Windows.Forms.Button btnConexConnect;
+        private System.Windows.Forms.ComboBox cmbBxConexPort;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Timer timerConex;
+        private System.Windows.Forms.TextBox txtBxConexNumber;
+        private System.Windows.Forms.TextBox txtBxConexStop;
+        private System.Windows.Forms.TextBox txtBxConexStart;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtBxLog;
+        private System.Windows.Forms.TextBox txtBxFileName;
+        private System.Windows.Forms.LinkLabel linkLabelBrowse;
+        private System.Windows.Forms.Label lblAbout;
+        private System.Windows.Forms.ToolTip toolTipAbout;
+        private System.Windows.Forms.ToolTip toolTiptxtBxFileName;
+        private System.Windows.Forms.ToolTip toolTipConexConnect;
+        private System.Windows.Forms.ToolTip toolTipConexDisconnect;
     }
 }
 

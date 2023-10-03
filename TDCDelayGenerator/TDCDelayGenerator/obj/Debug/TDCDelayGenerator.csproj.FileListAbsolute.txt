@@ -3,9 +3,11 @@ E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\TDCDel
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\TDCDelayGenerator.pdb
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\customControl.dll
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\customControl.pdb
-E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csprojResolveAssemblyReference.cache
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.Form1.resources
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.Properties.Resources.resources
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csproj.GenerateResource.Cache
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.exe
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.pdb
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\ConexAGPCmdLib.DLL
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\VCPWrap.dll
+E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\Logging.dll
