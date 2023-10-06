@@ -506,7 +506,7 @@ namespace TDCDelayGenerator
 
                 float[] positions = linspace(startDeg, stopDeg, N);
                 float[] positionsConex = linspace(startDegConex, stopDegConex, NConex);
-                float[] delayTimes = linspace(0, 255, N*NConex);
+                float[] delayTimes = linspace(0, 250, N*NConex);
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
                 
 
@@ -565,6 +565,7 @@ namespace TDCDelayGenerator
                             Thread.Sleep(400);
                             if (backgroundWorker1.CancellationPending)
                                 return;
+                            
 
                             float RotPosition = positions[iterPositions];
                             int DelayVal = (int)delayMatrix[iterConex, iterPositions];
@@ -573,6 +574,7 @@ namespace TDCDelayGenerator
                                 ";  Rot-Pos: " + RotPosition.ToString()+
                                 ";  Delay: "+ DelayVal.ToString();
 
+                            
                             moveAbs(RotPosition);
 
                             waitIdx = 0;
@@ -590,6 +592,7 @@ namespace TDCDelayGenerator
                             waitIdx = 0;
 
                             sendDelay(DelayVal);  // Send Delay
+                            addLog(text);
                             Thread.Sleep(100);
 
                             while (currentDelay != DelayVal)
@@ -636,7 +639,7 @@ namespace TDCDelayGenerator
                                     return;
                             }
 
-                            addLog(text);
+                            
                             writeToFile(text, fileName, "a");
                             
                             //Thread.Sleep(50);
