@@ -506,7 +506,7 @@ namespace TDCDelayGenerator
 
                 float[] positions = linspace(startDeg, stopDeg, N);
                 float[] positionsConex = linspace(startDegConex, stopDegConex, NConex);
-                float[] delayTimes = linspace(0, 250, N*NConex);
+                float[] delayTimes = linspace(0, 190, N*NConex);
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
                 
 
