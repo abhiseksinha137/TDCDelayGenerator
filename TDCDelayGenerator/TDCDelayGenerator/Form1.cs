@@ -51,16 +51,17 @@ namespace TDCDelayGenerator
             //changePanelStaus("Off");
 
             // Dummy values
-            txtBxStart.Text = "10";
-            txtBxStop.Text = "20";
-            txtBxNumber.Text = "2";
-            txtBxIterations.Text = "1";
-            txtBxACQseconds.Text = "10";
+            txtBxStart.Text = "3";
+            txtBxStop.Text = "93";
+            txtBxNumber.Text = "5";
+            txtBxIterations.Text = "24";
+            txtBxACQseconds.Text = "1000";
+            txtBxFileName.Text = "C:/Users/abhisek/Desktop/text.txt";
 
             //MessageBox.Show((2 % 2).ToString());
 
             // Initialize conex
-            conex= new ConexAGPCmds();
+            conex = new ConexAGPCmds();
 
             // Check linspace
             //float[] nums = linspace(2, 2, 2);
@@ -209,8 +210,8 @@ namespace TDCDelayGenerator
         void moveAbs(float targetDeg)
         {
             int steps = (int)targetDeg * stepsPerDegree;
-            comboSerial1.com.DiscardInBuffer();
-            comboSerial1.com.DiscardInBuffer();
+            //comboSerial1.com.DiscardInBuffer();
+            //comboSerial1.com.DiscardInBuffer();
 
             comboSerial1.sendSerial("r" + steps.ToString());
             ThreadHelperClass.SetText(this, lblexpStatus, "Moved " + steps.ToString() + " steps");
@@ -513,7 +514,7 @@ namespace TDCDelayGenerator
                 int iterPositions = 0;
                 int iterConex = 0;
 
-                ThreadHelperClass.SetText(this, txtBxTImePerEvent, deltaTime.ToString());
+                ThreadHelperClass.SetText(this, txtBxTImePerEvent, ((int)(deltaTime/1000)).ToString());
 
                 for (int iterSweep = 0; iterSweep < iterations; iterSweep++)
                 {

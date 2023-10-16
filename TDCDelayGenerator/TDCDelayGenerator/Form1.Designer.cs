@@ -66,6 +66,8 @@
             this.txtBxCurrentPos = new System.Windows.Forms.TextBox();
             this.txtBxmoveAbs = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtBxTImePerEvent = new System.Windows.Forms.TextBox();
             this.linkLabelBrowse = new System.Windows.Forms.LinkLabel();
             this.txtBxFileName = new System.Windows.Forms.TextBox();
             this.pnlStatus = new System.Windows.Forms.Panel();
@@ -102,8 +104,6 @@
             this.toolTiptxtBxFileName = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipConexConnect = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipConexDisconnect = new System.Windows.Forms.ToolTip(this.components);
-            this.txtBxTImePerEvent = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.gradientPanel2 = new TDCDelayGenerator.GradientPanel();
             this.tareStage = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
@@ -539,6 +539,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Controls";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(5, 400);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(86, 13);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "Time(sec)/Event";
+            // 
+            // txtBxTImePerEvent
+            // 
+            this.txtBxTImePerEvent.Enabled = false;
+            this.txtBxTImePerEvent.Location = new System.Drawing.Point(16, 416);
+            this.txtBxTImePerEvent.Name = "txtBxTImePerEvent";
+            this.txtBxTImePerEvent.Size = new System.Drawing.Size(58, 20);
+            this.txtBxTImePerEvent.TabIndex = 13;
+            // 
             // linkLabelBrowse
             // 
             this.linkLabelBrowse.AutoSize = true;
@@ -654,7 +671,7 @@
             this.txtBxConexNumber.Name = "txtBxConexNumber";
             this.txtBxConexNumber.Size = new System.Drawing.Size(100, 20);
             this.txtBxConexNumber.TabIndex = 3;
-            this.txtBxConexNumber.Text = "2";
+            this.txtBxConexNumber.Text = "1";
             // 
             // txtBxNumber
             // 
@@ -669,7 +686,7 @@
             this.txtBxConexStop.Name = "txtBxConexStop";
             this.txtBxConexStop.Size = new System.Drawing.Size(100, 20);
             this.txtBxConexStop.TabIndex = 2;
-            this.txtBxConexStop.Text = "2";
+            this.txtBxConexStop.Text = "0";
             // 
             // txtBxStop
             // 
@@ -701,7 +718,7 @@
             this.txtBxConexStart.Name = "txtBxConexStart";
             this.txtBxConexStart.Size = new System.Drawing.Size(100, 20);
             this.txtBxConexStart.TabIndex = 1;
-            this.txtBxConexStart.Text = "1";
+            this.txtBxConexStart.Text = "0";
             // 
             // label19
             // 
@@ -805,23 +822,6 @@
             this.txtBxLog.Size = new System.Drawing.Size(360, 444);
             this.txtBxLog.TabIndex = 11;
             this.txtBxLog.TextChanged += new System.EventHandler(this.txtBxLog_TextChanged);
-            // 
-            // txtBxTImePerEvent
-            // 
-            this.txtBxTImePerEvent.Enabled = false;
-            this.txtBxTImePerEvent.Location = new System.Drawing.Point(16, 416);
-            this.txtBxTImePerEvent.Name = "txtBxTImePerEvent";
-            this.txtBxTImePerEvent.Size = new System.Drawing.Size(58, 20);
-            this.txtBxTImePerEvent.TabIndex = 13;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(14, 400);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(63, 13);
-            this.label20.TabIndex = 14;
-            this.label20.Text = "Time/Event";
             // 
             // gradientPanel2
             // 
