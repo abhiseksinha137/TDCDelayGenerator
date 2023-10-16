@@ -102,6 +102,8 @@
             this.toolTiptxtBxFileName = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipConexConnect = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipConexDisconnect = new System.Windows.Forms.ToolTip(this.components);
+            this.txtBxTImePerEvent = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.gradientPanel2 = new TDCDelayGenerator.GradientPanel();
             this.tareStage = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
@@ -147,6 +149,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer1.Panel2.Controls.Add(this.label20);
+            this.splitContainer1.Panel2.Controls.Add(this.txtBxTImePerEvent);
             this.splitContainer1.Panel2.Controls.Add(this.linkLabelBrowse);
             this.splitContainer1.Panel2.Controls.Add(this.txtBxFileName);
             this.splitContainer1.Panel2.Controls.Add(this.pnlStatus);
@@ -802,6 +806,23 @@
             this.txtBxLog.TabIndex = 11;
             this.txtBxLog.TextChanged += new System.EventHandler(this.txtBxLog_TextChanged);
             // 
+            // txtBxTImePerEvent
+            // 
+            this.txtBxTImePerEvent.Enabled = false;
+            this.txtBxTImePerEvent.Location = new System.Drawing.Point(16, 416);
+            this.txtBxTImePerEvent.Name = "txtBxTImePerEvent";
+            this.txtBxTImePerEvent.Size = new System.Drawing.Size(58, 20);
+            this.txtBxTImePerEvent.TabIndex = 13;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(14, 400);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(63, 13);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "Time/Event";
+            // 
             // gradientPanel2
             // 
             this.gradientPanel2.Angle = -90F;
@@ -1058,6 +1079,8 @@
         private System.Windows.Forms.ToolTip toolTiptxtBxFileName;
         private System.Windows.Forms.ToolTip toolTipConexConnect;
         private System.Windows.Forms.ToolTip toolTipConexDisconnect;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtBxTImePerEvent;
     }
 }
 

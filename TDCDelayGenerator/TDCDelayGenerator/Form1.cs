@@ -508,11 +508,13 @@ namespace TDCDelayGenerator
                 float[] positionsConex = linspace(startDegConex, stopDegConex, NConex);
                 float[] delayTimes = linspace(0, 190, N*NConex);
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
-                
 
                 int deltaTime = ACQTime / (N * NConex* iterations) * 1000; // in milliseconds
                 int iterPositions = 0;
                 int iterConex = 0;
+
+                ThreadHelperClass.SetText(this, txtBxTImePerEvent, deltaTime.ToString());
+
                 for (int iterSweep = 0; iterSweep < iterations; iterSweep++)
                 {
                     Thread.Sleep(400);
@@ -578,7 +580,7 @@ namespace TDCDelayGenerator
                             moveAbs(RotPosition);
 
                             waitIdx = 0;
-                            while (currentDegVal != RotPosition) // Wait for stage to reach
+                            while (Math.Round(currentDegVal) != Math.Round(RotPosition)) // Wait for stage to reach
                             {
                                 ThreadHelperClass.SetText(this, lblStageStatus, "Moving " + waitIdx.ToString());
                                 waitIdx = waitIdx + 1;
