@@ -580,7 +580,7 @@ namespace TDCDelayGenerator
                             moveAbs(RotPosition);
 
                             waitIdx = 0;
-                            while (Math.Round(currentDegVal) != Math.Round(RotPosition)) // Wait for stage to reach
+                            while (Math.Floor(currentDegVal) != Math.Floor(RotPosition)) // Wait for stage to reach
                             {
                                 ThreadHelperClass.SetText(this, lblStageStatus, "Moving " + waitIdx.ToString());
                                 waitIdx = waitIdx + 1;
