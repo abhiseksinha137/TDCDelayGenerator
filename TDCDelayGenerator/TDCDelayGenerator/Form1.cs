@@ -586,7 +586,7 @@ namespace TDCDelayGenerator
                                 waitIdx = waitIdx + 1;
                                 if (waitIdx > waitLim)
                                 {
-                                    moveAbs(RotPosition); waitIdx = 0;
+                                    moveAbs((float)Math.Floor(RotPosition)); waitIdx = 0;
                                 }
                                 if (backgroundWorker1.CancellationPending)
                                     return;
