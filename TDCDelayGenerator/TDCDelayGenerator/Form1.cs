@@ -33,8 +33,13 @@ namespace TDCDelayGenerator
         ConexAGPCmds conex;
         String saveFileName;
         double conexCurrentPos;
+        AutoResetEvent mreCom;
+        AutoResetEvent mreMov;
         private void Form1_Load(object sender, EventArgs e)
         {
+            mreCom=new AutoResetEvent(false);
+            mreMov = new AutoResetEvent(false);
+
             //this.BackColor = Color.Lime;
             //this.TransparencyKey = Color.Lime;
 
@@ -97,23 +102,33 @@ namespace TDCDelayGenerator
             String data = comboSerial1.com.ReadLine();
             try
             {
-                string[] substrings = data.Split(',');
-                float stagePos = int.Parse(substrings[0]) / stepsPerDegree;
-                int delay = int.Parse(substrings[1]);
-                int servo = int.Parse(substrings[2]);
+                if (data.Substring(0, 3) != "com")
+                { 
+                    string[] substrings = data.Split(',');
+                    float stagePos = int.Parse(substrings[0]) / stepsPerDegree;
+                    int delay = int.Parse(substrings[1]);
+                    int servo = int.Parse(substrings[2]);
 
-                //int val;
-                //int.TryParse(data, out val);
-                //int valDeg = val/stepsPerDegree;
-                currentDegVal = stagePos;
-                currentDelay = delay;
-                currentServo = servo;
+                    //int val;
+                    //int.TryParse(data, out val);
+                    //int valDeg = val/stepsPerDegree;
+                    currentDegVal = stagePos;
+                    currentDelay = delay;
+                    currentServo = servo;
 
-                ThreadHelperClass.SetText(this, txtBxCurrentPos, currentDegVal.ToString());
+                    ThreadHelperClass.SetText(this, txtBxCurrentPos, currentDegVal.ToString());
 
-                ThreadHelperClass.SetText(this, txtBxCurrentDelay, currentDelay.ToString());
+                    ThreadHelperClass.SetText(this, txtBxCurrentDelay, currentDelay.ToString());
 
-                ThreadHelperClass.SetText(this, txtBxCurrentServo, currentServo.ToString());
+                    ThreadHelperClass.SetText(this, txtBxCurrentServo, currentServo.ToString());
+                    mreMov.Set();
+                }
+                else
+                {
+                    String received = data.Substring(3);
+                    mreCom.Set();
+                }
+
             }
             catch (Exception ex)
             { }
@@ -577,21 +592,41 @@ namespace TDCDelayGenerator
                                 ";  Rot-Pos: " + RotPosition.ToString()+
                                 ";  Delay: "+ DelayVal.ToString();
 
-                            
-                            moveAbs(RotPosition);
 
-                            waitIdx = 0;
-                            while (Math.Floor(currentDegVal) != Math.Floor(RotPosition)) // Wait for stage to reach
+                            var responseTimeoutCom = TimeSpan.FromSeconds(3);
+                            var responseTimeoutMov = TimeSpan.FromSeconds(120);
+                            mreCom = new AutoResetEvent(false);
+                            mreMov = new AutoResetEvent(false);
+                            
+                            while (true)
                             {
-                                ThreadHelperClass.SetText(this, lblStageStatus, "Moving " + waitIdx.ToString());
-                                waitIdx = waitIdx + 1;
-                                if (waitIdx > waitLim)
+                                mreCom = new AutoResetEvent(false);
+                                mreMov = new AutoResetEvent(false);
+                                moveAbs(RotPosition);
+                                if (!mreCom.WaitOne(responseTimeoutCom))
                                 {
-                                    moveAbs((float)Math.Floor(RotPosition)); waitIdx = 0;
+                                    continue;
                                 }
-                                if (backgroundWorker1.CancellationPending)
-                                    return;
+                                if (!mreMov.WaitOne(responseTimeoutMov))
+                                {
+                                    continue;
+                                }
+                                break;
                             }
+
+
+                            //waitIdx = 0;
+                            //while (Math.Floor(currentDegVal) != Math.Floor(RotPosition)) // Wait for stage to reach
+                            //{
+                            //    ThreadHelperClass.SetText(this, lblStageStatus, "Moving " + waitIdx.ToString());
+                            //    waitIdx = waitIdx + 1;
+                            //    if (waitIdx > waitLim)
+                            //    {
+                            //        moveAbs((float)Math.Floor(RotPosition)); waitIdx = 0;
+                            //    }
+                            //    if (backgroundWorker1.CancellationPending)
+                            //        return;
+                            //}
                             waitIdx = 0;
 
                             sendDelay(DelayVal);  // Send Delay
@@ -885,6 +920,11 @@ namespace TDCDelayGenerator
         }
 
         private void txtBxConexCurrentPos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
         {
 
         }
