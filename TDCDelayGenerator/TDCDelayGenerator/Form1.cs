@@ -625,7 +625,7 @@ namespace TDCDelayGenerator
                             //*********** Move Rotation Stage ******************
 
                             ThreadHelperClass.SetText(this, lblStageStatus, "Moving Stage to "+ RotPosition.ToString());
-                            var responseTimeoutCom = TimeSpan.FromSeconds(3);
+                            var responseTimeoutCom = TimeSpan.FromSeconds(10);
                             var responseTimeoutMov = TimeSpan.FromSeconds(120);
                             mreCom = new AutoResetEvent(false);
                             mreMov = new AutoResetEvent(false);
@@ -647,7 +647,7 @@ namespace TDCDelayGenerator
                                     addLog("Motion time out");
                                     continue;
                                 }
-                                Thread.Sleep(1000);
+                                Thread.Sleep(10000);
 
                                 addLog($"currentDegVal {currentDegVal}, RotPosition Target {RotPosition}");
                                 if (isWhithinError(currentDegVal, RotPosition, 1))

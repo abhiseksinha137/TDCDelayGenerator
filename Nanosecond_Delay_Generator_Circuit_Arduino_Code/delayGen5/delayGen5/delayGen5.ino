@@ -70,21 +70,34 @@ void loop() {
   { // Rotation Code
     //Serial.println("Rotation");
     String rotStr=inputStr.substring(1);
-    long rotVal=rotStr.toInt();
-    rotateStage(rotVal);
+    if (isValidInput(rotStr))
+    { 
+      long rotVal=rotStr.toInt();
+      rotateStage(rotVal);
+    }
+
   }
   if (firstChar=='d')
   { // Delay Code
     //Serial.println("Delay");
     String delayStr=inputStr.substring(1);
-    delayVal=delayStr.toInt();
-//    Serial.println(delayStr);
-    donateDelay();
+    if (isValidInput(delayStr))
+    {
+      delayVal=delayStr.toInt();
+  //    Serial.println(delayStr);
+      donateDelay();
+    }
   }
   if (firstChar=='s')
   { // Servo Code
     // Serial.println("Servo");
     String servoStr=inputStr.substring(1);
+    
+    if (isValidInput(servoStr))
+    {
+      servoPos=servoStr.toInt();
+      servo();
+    }
     servoPos=servoStr.toInt();
     servo();
   }
@@ -223,6 +236,18 @@ long readStagePos(int addrOffset)
 void updateStatus(){
   Serial.println(String(readStagePos(0))+","+String(delayVal)+","+String(servoPos));
 }
+
+int isValidInput(String input)
+{
+  for(int i =0; i < input.length(); i++ ) 
+  {
+    char c = input[i];
+    if (!isDigit(c))  // tests if myChar is a digit
+      return 0;
+  }
+  return 1;
+}
+
 //s0/1
 //r0-359
 //d0-255

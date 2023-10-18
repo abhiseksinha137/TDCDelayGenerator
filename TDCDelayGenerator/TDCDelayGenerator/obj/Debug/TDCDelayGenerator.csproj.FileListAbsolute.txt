@@ -12,3 +12,17 @@ E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\ConexA
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\VCPWrap.dll
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\Logging.dll
 E:\CSharp\TDCDelayGenerator\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csprojResolveAssemblyReference.cache
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\TDCDelayGenerator.exe.config
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.exe
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.pdb
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\TDCDelayGenerator.exe
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\TDCDelayGenerator.pdb
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\ConexAGPCmdLib.DLL
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\customControl.dll
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\VCPWrap.dll
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\Logging.dll
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\bin\Debug\customControl.pdb
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csprojResolveAssemblyReference.cache
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.Form1.resources
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.Properties.Resources.resources
+E:\CSharp\TDCDelaygeneratpr_Github\TDCDelayGenerator\TDCDelayGenerator\obj\Debug\TDCDelayGenerator.csproj.GenerateResource.Cache
