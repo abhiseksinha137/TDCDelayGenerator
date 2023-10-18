@@ -61,7 +61,7 @@ void loop() {
   if (commandReceived==1)
   {
     delay(300);
-    Serial.println("com"+inputStr);
+    Serial.print("com"+inputStr);
   }  
   char firstChar=inputStr.charAt(0);
   //Serial.println(firstChar);
@@ -98,8 +98,6 @@ void loop() {
       servoPos=servoStr.toInt();
       servo();
     }
-    servoPos=servoStr.toInt();
-    servo();
   }
 
    if (firstChar=='t')//tare
@@ -239,11 +237,24 @@ void updateStatus(){
 
 int isValidInput(String input)
 {
-  for(int i =0; i < input.length(); i++ ) 
+  int str_len=input.length();
+  char inputChar[str_len];
+  input.toCharArray(inputChar, str_len);
+  // Serial.println(inputChar);
+  for(int i =0; i < str_len-1; i++ ) 
   {
-    char c = input[i];
+    
+    char c = inputChar[i];
     if (!isDigit(c))  // tests if myChar is a digit
+    {
+      // Serial.println(c);
+      // Serial.println("Not a Number");
       return 0;
+    }
+    else{
+      // Serial.print("Number ");
+      // Serial.println(c);
+    }
   }
   return 1;
 }
