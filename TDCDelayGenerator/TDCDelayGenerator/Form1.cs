@@ -246,6 +246,7 @@ namespace TDCDelayGenerator
             //comboSerial1.com.DiscardInBuffer();
 
             comboSerial1.sendSerial("r" + steps.ToString());
+            Thread.Sleep(500);
             ThreadHelperClass.SetText(this, lblexpStatus, "Moved " + steps.ToString() + " steps");
 
 
@@ -635,17 +636,24 @@ namespace TDCDelayGenerator
                                 mreCom = new AutoResetEvent(false);
                                 mreMov = new AutoResetEvent(false);
                                 moveAbs(RotPosition);
+                                addLog("Command: moveAbs " + RotPosition.ToString() + " Sent");
                                 if (!mreCom.WaitOne(responseTimeoutCom))
                                 {
+                                    addLog("ACK time out. ");
                                     continue;
                                 }
                                 if (!mreMov.WaitOne(responseTimeoutMov))
                                 {
+                                    addLog("Motion time out");
                                     continue;
                                 }
                                 Thread.Sleep(1000);
-                                if (isWhithinError(currentDegVal,RotPosition,1))
+
+                                addLog($"currentDegVal {currentDegVal}, RotPosition Target {RotPosition}");
+                                if (isWhithinError(currentDegVal, RotPosition, 1))
                                     break;
+                                else
+                                    addLog("Position not within Error");
                             }
                             if (backgroundWorker1.CancellationPending)
                                 return;
