@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -35,6 +36,7 @@ namespace TDCDelayGenerator
         double conexCurrentPos;
         AutoResetEvent mreCom;
         AutoResetEvent mreMov;
+        AutoResetEvent sleepTimer;
         private void Form1_Load(object sender, EventArgs e)
         {
             mreCom =new AutoResetEvent(false);
@@ -552,6 +554,7 @@ namespace TDCDelayGenerator
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
 
                 int deltaTime = ACQTime / (N * NConex* iterations) * 1000; // in milliseconds
+                Stopwatch stopwatch = new Stopwatch(); // Create stopwatch
                 int iterPositions = 0;
                 int iterConex = 0;
 
@@ -745,8 +748,27 @@ namespace TDCDelayGenerator
                             waitIdx = 0;
 
                             // Acquire Data
-                            ThreadHelperClass.SetText(this, lblStageStatus, "ACQUIRING...");
-                            Thread.Sleep(deltaTime);
+
+                            // Reset the stopwatch
+                            stopwatch.Reset();
+                            // Begin timing
+                            stopwatch.Start();
+                            while (stopwatch.ElapsedMilliseconds < deltaTime)
+                            {
+                                Thread.Sleep(50);
+                                ThreadHelperClass.SetText(this, lblStageStatus, "ACQUIRING... "+ (stopwatch.ElapsedMilliseconds/1000).ToString() + " s");
+                                if (backgroundWorker1.CancellationPending)
+                                    return;
+                                Thread.Sleep(50);
+                            }
+                            // Stop timing
+                            stopwatch.Stop();
+                            //// Write result
+                            //Console.WriteLine("Time elapsed: {0}",
+                            //    stopwatch.Elapsed);
+
+                            //ThreadHelperClass.SetText(this, lblStageStatus, "ACQUIRING...");
+                            //Thread.Sleep(deltaTime);
 
 
                             // ***************** Turn OFF Beam *****************
@@ -1038,7 +1060,7 @@ namespace TDCDelayGenerator
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+           
         }
     }
 }
