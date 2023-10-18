@@ -37,7 +37,7 @@ namespace TDCDelayGenerator
         AutoResetEvent mreMov;
         private void Form1_Load(object sender, EventArgs e)
         {
-            mreCom=new AutoResetEvent(false);
+            mreCom =new AutoResetEvent(false);
             mreMov = new AutoResetEvent(false);
 
             //this.BackColor = Color.Lime;
@@ -222,9 +222,24 @@ namespace TDCDelayGenerator
                 MessageBox.Show(ex.Message);
             }
         }
+
+        float RoundToTwoPlaces(float input)
+        {
+            float output = (float)Math.Round(input * 100) / 100;
+            return output;
+        }
+        float[] RoundToTwoPlaces(float[] input)
+        {
+            float[] output = new float[input.Length];
+            for (int ii=0; ii<input.Length; ii++)
+            {
+                output[ii] = RoundToTwoPlaces(input[ii]);
+            }
+            return output;
+        }
         void moveAbs(float targetDeg)
         {
-            int steps = (int)targetDeg * stepsPerDegree;
+            int steps = (int) (RoundToTwoPlaces(targetDeg) * stepsPerDegree);
             //comboSerial1.com.DiscardInBuffer();
             //comboSerial1.com.DiscardInBuffer();
 
@@ -496,6 +511,17 @@ namespace TDCDelayGenerator
         //    }
 
         //}
+        bool isWhithinError(float input, float reference, float error)
+        {
+            input = Math.Abs(input);
+            reference = Math.Abs(reference);
+            error = Math.Abs(error);
+
+            if ((input + error) > reference && (input - error) < reference)
+                return true;
+            else
+                return false;
+        }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -520,8 +546,8 @@ namespace TDCDelayGenerator
                 int ACQTime = int.Parse(txtBxACQseconds.Text);
                 int waitLim = 3000;
 
-                float[] positions = linspace(startDeg, stopDeg, N);
-                float[] positionsConex = linspace(startDegConex, stopDegConex, NConex);
+                float[] positions =RoundToTwoPlaces(linspace(startDeg, stopDeg, N));
+                float[] positionsConex = RoundToTwoPlaces(linspace(startDegConex, stopDegConex, NConex));
                 float[] delayTimes = linspace(0, 190, N*NConex);
                 float[,] delayMatrix = ConvertMatrix(delayTimes, NConex, N);
 
@@ -592,12 +618,15 @@ namespace TDCDelayGenerator
                                 ";  Rot-Pos: " + RotPosition.ToString()+
                                 ";  Delay: "+ DelayVal.ToString();
 
+                            //*********** Move Rotation Stage ******************
 
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Moving Stage to "+ RotPosition.ToString());
                             var responseTimeoutCom = TimeSpan.FromSeconds(3);
                             var responseTimeoutMov = TimeSpan.FromSeconds(120);
                             mreCom = new AutoResetEvent(false);
                             mreMov = new AutoResetEvent(false);
-                            
+
+                            Thread.Sleep(200);
                             while (true)
                             {
                                 mreCom = new AutoResetEvent(false);
@@ -611,9 +640,13 @@ namespace TDCDelayGenerator
                                 {
                                     continue;
                                 }
-                                break;
+                                Thread.Sleep(1000);
+                                if (isWhithinError(currentDegVal,RotPosition,1))
+                                    break;
                             }
-
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                            // **************************************************
 
                             //waitIdx = 0;
                             //while (Math.Floor(currentDegVal) != Math.Floor(RotPosition)) // Wait for stage to reach
@@ -627,57 +660,136 @@ namespace TDCDelayGenerator
                             //    if (backgroundWorker1.CancellationPending)
                             //        return;
                             //}
-                            waitIdx = 0;
-
-                            sendDelay(DelayVal);  // Send Delay
+                            //waitIdx = 0;
+                            //*********** Send Delay ******************
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Sending Delay =  " + DelayVal.ToString());
+                            responseTimeoutCom = TimeSpan.FromSeconds(3);
+                            responseTimeoutMov = TimeSpan.FromSeconds(3);
+                            Thread.Sleep(200);
+                            while (true)
+                            {
+                                mreCom = new AutoResetEvent(false);
+                                mreMov = new AutoResetEvent(false);
+                                sendDelay(DelayVal);
+                                if (!mreCom.WaitOne(responseTimeoutCom))
+                                {
+                                    continue;
+                                }
+                                if (!mreMov.WaitOne(responseTimeoutMov))
+                                {
+                                    continue;
+                                }
+                                Thread.Sleep(1000);
+                                if (isWhithinError(currentDelay, DelayVal, 1))
+                                    break;
+                            }
+                            // *********************************************************
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                            //sendDelay(DelayVal);  // Send Delay
                             addLog(text);
-                            Thread.Sleep(100);
 
-                            while (currentDelay != DelayVal)
+
+                            //while (currentDelay != DelayVal)
+                            //{
+                            //    ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Delay " + waitIdx.ToString());
+                            //    waitIdx = waitIdx + 1;
+                            //    if (waitIdx > waitLim)
+                            //    {
+                            //        sendDelay(DelayVal); waitIdx = 0;
+                            //    }
+                            //    if (backgroundWorker1.CancellationPending)
+                            //        return;
+                            //}
+                            //waitIdx = 0;
+
+
+                            // ***************** Turn on Beam *****************
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Turning Beam ON");
+                            responseTimeoutCom = TimeSpan.FromSeconds(3);
+                            responseTimeoutMov = TimeSpan.FromSeconds(3);
+                            Thread.Sleep(200);
+                            while (true)
                             {
-                                ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Delay " + waitIdx.ToString());
-                                waitIdx = waitIdx + 1;
-                                if (waitIdx > waitLim)
+                                mreCom = new AutoResetEvent(false);
+                                mreMov = new AutoResetEvent(false);
+                                SendbeamOn();
+                                if (!mreCom.WaitOne(responseTimeoutCom))
                                 {
-                                    sendDelay(DelayVal); waitIdx = 0;
+                                    continue;
                                 }
-                                if (backgroundWorker1.CancellationPending)
-                                    return;
-                            }
-                            waitIdx = 0;
-                            SendbeamOn();  // Turn On beam
-                            while (currentServo != beamOn)
-                            {
-                                ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam On " + waitIdx.ToString() + currentServo.ToString());
-                                waitIdx = waitIdx + 1;
-                                if (waitIdx > waitLim)
+                                if (!mreMov.WaitOne(responseTimeoutMov))
                                 {
-                                    SendbeamOn(); waitIdx = 0;
+                                    continue;
                                 }
-                                if (backgroundWorker1.CancellationPending)
-                                    return;
+                                Thread.Sleep(500);
+                                if (isWhithinError(currentServo, beamOn, 5))
+                                    break;
                             }
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                            //SendbeamOn();  // Turn On beam
+                            //while (currentServo != beamOn)
+                            //{
+                            //    ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam On " + waitIdx.ToString() + currentServo.ToString());
+                            //    waitIdx = waitIdx + 1;
+                            //    if (waitIdx > waitLim)
+                            //    {
+                            //        SendbeamOn(); waitIdx = 0;
+                            //    }
+                            //    if (backgroundWorker1.CancellationPending)
+                            //        return;
+                            //}
+
+                            // ******************************************
                             waitIdx = 0;
 
                             // Acquire Data
+                            ThreadHelperClass.SetText(this, lblStageStatus, "ACQUIRING...");
                             Thread.Sleep(deltaTime);
-                             
-                            SendbeamOff();  // Turn Off beam
 
-                            waitIdx = 0;
-                            while (currentServo != beamOff)
+
+                            // ***************** Turn OFF Beam *****************
+                            ThreadHelperClass.SetText(this, lblStageStatus, "Turning Beam OFF");
+                            responseTimeoutCom = TimeSpan.FromSeconds(3);
+                            responseTimeoutMov = TimeSpan.FromSeconds(3);
+                            Thread.Sleep(200);
+                            while (true)
                             {
-                                ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam Off " + waitIdx.ToString());
-                                waitIdx = waitIdx + 1;
-                                if (waitIdx > waitLim)
+                                mreCom = new AutoResetEvent(false);
+                                mreMov = new AutoResetEvent(false);
+                                SendbeamOff();
+                                if (!mreCom.WaitOne(responseTimeoutCom))
                                 {
-                                    SendbeamOff(); waitIdx = 0;
+                                    continue;
                                 }
-                                if (backgroundWorker1.CancellationPending)
-                                    return;
+                                if (!mreMov.WaitOne(responseTimeoutMov))
+                                {
+                                    continue;
+                                }
+                                Thread.Sleep(1000);
+                                if (isWhithinError(currentServo, beamOff, 5))
+                                    break;
                             }
+                            if (backgroundWorker1.CancellationPending)
+                                return;
+                            //SendbeamOff();  // Turn Off beam
+                            // **************************************************
 
-                            
+                            //waitIdx = 0;
+                            //while (currentServo != beamOff)
+                            //{
+                            //    ThreadHelperClass.SetText(this, lblStageStatus, "Waiting Beam Off " + waitIdx.ToString());
+                            //    waitIdx = waitIdx + 1;
+                            //    if (waitIdx > waitLim)
+                            //    {
+                            //        SendbeamOff(); waitIdx = 0;
+                            //    }
+                            //    if (backgroundWorker1.CancellationPending)
+                            //        return;
+                            //}
+
+
                             writeToFile(text, fileName, "a");
                             
                             //Thread.Sleep(50);
